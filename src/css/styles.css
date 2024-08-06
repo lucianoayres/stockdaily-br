@@ -75,7 +75,7 @@ body {
 .main__tabs {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
+    gap: 2rem;
 }
 
 .main__tab {
