@@ -4,10 +4,38 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>StockDaily-BR</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="css/styles.css" />
         <script src="js/main.js" defer></script>
     </head>
     <body>
-        StockDaily-BR Placeholder
+        <header class="header">
+            <img src="path/to/logo.svg" alt="Logo" class="header__logo-image" />
+        </header>
+        <main class="page__main">
+            <section class="main__top">
+                <h1 class="main__tagline">Welcome to my website</h1>
+                <div class="main__tabs">
+                    <button class="main__tab">YESTERDAY</button>
+                    <button class="main__tab main__tab--active">TODAY</button>
+                </div>
+            </section>
+            <section class="main__info">
+                <div class="main__code">ABCD</div>
+                <div class="main__company">COMPANY</div>
+                <div class="main__disclaimer">
+                    <img src="path/to/icon_warning.svg" alt="warning" class="main__disclaimer-icon" />
+                    This is not financial advice!
+                </div>
+            </section>
+            <section class="main__bottom">
+                <!-- This section is intentionally left empty -->
+            </section>
+        </main>
+        <footer class="footer">
+            <a href="https://github.com/your-repo" class="footer__link">Project on GitHub</a>
+        </footer>
     </body>
 </html>
