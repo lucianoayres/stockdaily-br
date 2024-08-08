@@ -42,8 +42,9 @@ body {
     font-weight: var(--font-weight-normal);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh; /* Set body height to 100vh to cover the full viewport height */
     background-color: var(--color-background);
+    overflow: hidden; /* Prevent scrolling */
 }
 
 /* Page Layout */
@@ -51,6 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
+    height: 100%; /* Ensure the page takes the full height */
 }
 
 /* Header */
@@ -60,12 +62,8 @@ body {
     justify-content: center;
     width: 100%;
     background-color: var(--color-header-footer);
-    padding: 1rem 0;
+    height: var(--header-footer-height); /* Set fixed height */
     text-align: center;
-}
-
-.header__logo-image {
-    height: var(--header-footer-height);
 }
 
 /* Main Content */
@@ -74,7 +72,8 @@ body {
     flex-direction: column;
     flex: 1;
     padding: var(--padding-base);
-    height: calc(100vh - 8rem); /* Adjust based on header and footer height */
+    height: calc(100vh - 2 * var(--header-footer-height)); /* Adjust height based on header and footer */
+    overflow-y: auto; /* Allow scrolling within the main content if necessary */
 }
 
 /* Layout Sections */
@@ -131,6 +130,7 @@ body {
 
 /* Main Info: Centered in Middle */
 .main__info {
+    padding-top: 3.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,11 +169,12 @@ body {
     justify-content: center;
     font-size: 1.2rem;
     width: 100%;
+    height: var(--header-footer-height); /* Set fixed height */
     background-color: var(--color-header-footer);
-    padding: 1rem 0;
     text-align: center;
 }
 
+/* Footer Link */
 .footer__link {
     display: flex;
     justify-content: center;
@@ -193,8 +194,11 @@ body {
         font-size: 1.5rem;
     }
 
+    .main__info {
+        padding-top: 2.2rem;
+    }
+
     .main__code {
-        padding-top: 2rem;
         font-size: 10rem;
     }
 
@@ -205,5 +209,10 @@ body {
     .main__tab {
         font-size: 1.4rem;
         padding: 0.5rem 1rem;
+    }
+
+    .page__main {
+        padding: 1rem; /* Reduce padding on smaller screens */
+        height: calc(100vh - 2 * var(--header-footer-height)); /* Adjust main content height */
     }
 }
