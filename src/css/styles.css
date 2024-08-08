@@ -194,6 +194,7 @@ body {
     }
 
     .main__code {
+        padding-top: 2rem;
         font-size: 8.5rem;
     }
 
