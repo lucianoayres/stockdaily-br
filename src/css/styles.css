@@ -136,6 +136,25 @@ body {
     justify-content: center;
 }
 
+.main__loading {
+    width: 36px;
+    height: 36px;
+    border: 6px solid var(--color-tab-background);
+    border-top: 6px solid var(--color-text-primary);
+    border-radius: 50%;
+    animation: spin 0.5s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .main__code {
     font-size: 18rem;
     font-weight: var(--font-weight-bold);
