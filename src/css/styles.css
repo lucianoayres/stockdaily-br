@@ -125,7 +125,6 @@ body {
 .main__tab--active {
     background-color: var(--color-tab-active-background);
     color: var(--color-tab-active-text);
-    border-color: var(--color-tab-active-background);
 }
 
 /* Main Info: Centered in Middle */
@@ -173,7 +172,7 @@ body {
     background-color: var(--color-header-footer);
     text-align: center;
     flex-shrink: 0;
-    position: relative;
+    position: sticky;
     bottom: 0;
 }
 
