@@ -172,6 +172,9 @@ body {
     height: var(--header-footer-height); /* Set fixed height */
     background-color: var(--color-header-footer);
     text-align: center;
+    flex-shrink: 0;
+    position: relative;
+    bottom: 0;
 }
 
 /* Footer Link */
