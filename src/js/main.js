@@ -65,3 +65,7 @@ function init() {
 }
 
 init()
+
+// TODO:
+// 1. Add "Tab" click states
+// 2. Implement loadData function
