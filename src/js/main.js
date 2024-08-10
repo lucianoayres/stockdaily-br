@@ -8,7 +8,7 @@ const elements = {
     disclaimer: document.querySelector(".main__disclaimer"),
 }
 
-const DATA_URL = "ahttps://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
+const DATA_URL = "https://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
 
 const setVisibility = (element, visibility) => {
     if (element) element.style.visibility = visibility
@@ -62,7 +62,7 @@ const fetchData = async () => {
 
         updateText(elements.code, code)
         updateText(elements.company, company)
-        states.showData()
+        //states.showData()
     } catch (error) {
         console.error("Error fetching data:", error)
         states.error()
