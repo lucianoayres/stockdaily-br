@@ -6,9 +6,12 @@ const elements = {
     code: document.querySelector(".main__code"),
     company: document.querySelector(".main__company"),
     disclaimer: document.querySelector(".main__disclaimer"),
+    todayTab: document.getElementById("today-tab"),
+    yesterdayTab: document.getElementById("yesterday-tab"),
 }
 
-const DATA_URL = "https://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
+const STOCK_DATA_URL = "https://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-last-picks.json"
+const ACTIVE_TAB_CLASSNAME = "main__tab--active"
 
 const setVisibility = (element, visibility) => {
     if (element) element.style.visibility = visibility
@@ -50,16 +53,16 @@ const states = {
 
 const fetchData = async () => {
     try {
-        const response = await fetch(DATA_URL)
+        const response = await fetch(STOCK_DATA_URL)
         if (!response.ok) throw new Error("Network response was not ok")
 
         const data = await response.json()
-        console.log(data)
-        const { ticker: code, name: company } = data
+        if (data.length === 0) throw new Error("No data available")
 
-        if (!code || !company) {
-            throw new Error("Invalid data: code or company is missing")
-        }
+        const lastItem = data.length === 1 ? data[0] : data[data.length - 1]
+        const { ticker: code, name: company } = lastItem
+
+        if (!code || !company) throw new Error("Invalid data: code or company is missing")
 
         updateText(elements.code, code)
         updateText(elements.company, company)
@@ -69,6 +72,14 @@ const fetchData = async () => {
         states.error()
     }
 }
+
+function switchTab(activeTab, inactiveTab) {
+    activeTab.classList.add(ACTIVE_TAB_CLASSNAME)
+    inactiveTab.classList.remove(ACTIVE_TAB_CLASSNAME)
+}
+
+elements.todayTab.addEventListener("click", () => switchTab(elements.todayTab, elements.yesterdayTab))
+elements.yesterdayTab.addEventListener("click", () => switchTab(elements.yesterdayTab, elements.todayTab))
 
 const init = () => {
     states.loading()
