@@ -8,7 +8,7 @@ const elements = {
     disclaimer: document.querySelector(".main__disclaimer"),
 }
 
-const DATA_URL = "https://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
+const DATA_URL = "https://1raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
 
 const setVisibility = (element, visibility) => {
     if (element) element.style.visibility = visibility
