@@ -1,71 +1,67 @@
-const mainTop = document.querySelector(".main__top")
-const tabs = document.querySelector(".main__tabs")
-
-const loading = document.querySelector(".main__loading")
-
-const error = document.querySelector(".main__error")
-
-const code = document.querySelector(".main__code")
-const company = document.querySelector(".main__company")
-const disclaimer = document.querySelector(".main__disclaimer")
-
-function hideLoadedState() {
-    // loaded state hidden
-    tabs.style.visibility = "hidden"
-    code.style.visibility = "hidden"
-    company.style.visibility = "hidden"
-    disclaimer.style.visibility = "hidden"
+const elements = {
+    mainTop: document.querySelector(".main__top"),
+    tabs: document.querySelector(".main__tabs"),
+    loading: document.querySelector(".main__loading"),
+    error: document.querySelector(".main__error"),
+    code: document.querySelector(".main__code"),
+    company: document.querySelector(".main__company"),
+    disclaimer: document.querySelector(".main__disclaimer"),
 }
 
-function hideLoadingState() {
-    // loading state hidden
-    loading.style.display = "none"
+const setVisibility = (element, visibility) => {
+    if (element) element.style.visibility = visibility
 }
 
-function hideErrorState() {
-    // error state hidden
-    error.style.display = "none"
+const setDisplay = (element, display) => {
+    if (element) element.style.display = display
 }
 
-function showLoadedState() {
-    // loaded state hidden
-    tabs.style.visibility = "visible"
-    code.style.visibility = "visible"
-    company.style.visibility = "visible"
-    disclaimer.style.visibility = "visible"
+const updateText = (element, text) => {
+    if (element) element.textContent = text
 }
 
-function showLoadingState() {
-    // loading state hidden
-    loading.style.display = "block"
+const states = {
+    loading: () => {
+        setDisplay(elements.loading, "block")
+        setVisibility(elements.mainTop, "visible")
+        setVisibility(elements.tabs, "hidden")
+        setVisibility(elements.code, "hidden")
+        setVisibility(elements.company, "hidden")
+        setVisibility(elements.disclaimer, "hidden")
+        setDisplay(elements.error, "none")
+    },
+    showData: () => {
+        setDisplay(elements.loading, "none")
+        setVisibility(elements.mainTop, "visible")
+        setVisibility(elements.tabs, "visible")
+        setVisibility(elements.code, "visible")
+        setVisibility(elements.company, "visible")
+        setVisibility(elements.disclaimer, "visible")
+        setDisplay(elements.error, "none")
+    },
+    error: () => {
+        setDisplay(elements.loading, "none")
+        setDisplay(elements.error, "flex")
+        setVisibility(elements.mainTop, "hidden")
+    },
 }
 
-function showErrorState() {
-    // error state hidden
-    error.style.display = "block"
-    mainTop.style.visibility = "hidden"
-}
-
-function loadData() {
-    // Load data code (TBD)
+const loadData = () => {
+    updateText(elements.code, "PETR")
+    updateText(elements.company, "PETROBRAS")
     console.log("Load data invoked")
+    states.showData() // Show the loaded data state
 }
 
-function init() {
-    hideErrorState()
-    hideLoadedState()
+const init = () => {
+    states.loading() // Start with the loading state
 
-    loadData()
-    // if success:
-    // hideLoadingState()
-    // showLoadedState()
-    // else
-    // hideLoadingState()
-    // showErrorState()
+    try {
+        loadData() // Attempt to load data
+    } catch (error) {
+        console.error("Error loading data:", error)
+        states.error() // Switch to error state on failure
+    }
 }
 
 init()
-
-// TODO:
-// 1. Add "Tab" click states
-// 2. Implement loadData function
