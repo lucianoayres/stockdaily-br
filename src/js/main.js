@@ -24,7 +24,7 @@ const updateText = (element, text) => {
 
 const states = {
     loading: () => {
-        setDisplay(elements.loading, "block")
+        setVisibility(elements.loading, "visible")
         setVisibility(elements.mainTop, "hidden")
         setVisibility(elements.tabs, "hidden")
         setVisibility(elements.code, "hidden")
@@ -42,7 +42,7 @@ const states = {
         setDisplay(elements.error, "none")
     },
     error: () => {
-        setDisplay(elements.loading, "none")
+        setVisibility(elements.loading, "hidden")
         setDisplay(elements.error, "flex")
         setVisibility(elements.mainTop, "hidden")
     },
@@ -62,7 +62,7 @@ const fetchData = async () => {
 
         updateText(elements.code, code)
         updateText(elements.company, company)
-        //states.showData()
+        states.showData()
     } catch (error) {
         console.error("Error fetching data:", error)
         states.error()
