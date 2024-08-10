@@ -51,16 +51,24 @@ const states = {
     },
 }
 
-const fetchData = async () => {
+const fetchData = async (index = -1) => {
     try {
         const response = await fetch(STOCK_DATA_URL)
         if (!response.ok) throw new Error("Network response was not ok")
 
         const data = await response.json()
+        console.log(data)
         if (data.length === 0) throw new Error("No data available")
 
-        const lastItem = data.length === 1 ? data[0] : data[data.length - 1]
-        const { ticker: code, name: company } = lastItem
+        // Hide the "Yesterday" tab if there's only one item
+        if (data.length === 1) {
+            setDisplay(elements.yesterdayTab, "none")
+        } else {
+            setDisplay(elements.yesterdayTab, "block")
+        }
+
+        const selectedItem = index === -1 ? data[data.length - 1] : data[data.length - 2]
+        const { ticker: code, name: company } = selectedItem
 
         if (!code || !company) throw new Error("Invalid data: code or company is missing")
 
@@ -73,17 +81,19 @@ const fetchData = async () => {
     }
 }
 
-function switchTab(activeTab, inactiveTab) {
+function switchTab(activeTab, inactiveTab, index) {
     activeTab.classList.add(ACTIVE_TAB_CLASSNAME)
     inactiveTab.classList.remove(ACTIVE_TAB_CLASSNAME)
+    states.loading()
+    fetchData(index)
 }
 
-elements.todayTab.addEventListener("click", () => switchTab(elements.todayTab, elements.yesterdayTab))
-elements.yesterdayTab.addEventListener("click", () => switchTab(elements.yesterdayTab, elements.todayTab))
+elements.todayTab.addEventListener("click", () => switchTab(elements.todayTab, elements.yesterdayTab, -1))
+elements.yesterdayTab.addEventListener("click", () => switchTab(elements.yesterdayTab, elements.todayTab, -2))
 
 const init = () => {
     states.loading()
-    fetchData()
+    fetchData() // Load the last item (today's data) by default
 }
 
 init()
