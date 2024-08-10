@@ -22,7 +22,7 @@ const setDisplay = (element, display) => {
 }
 
 const updateText = (element, text) => {
-    if (element) element.textContent = text
+    if (element) element.textContent = text.toUpperCase()
 }
 
 const disableYesterdayTab = (disable) => {
