@@ -102,6 +102,7 @@ body {
     display: flex;
     justify-content: center;
     gap: var(--gap-base);
+    user-select: none; /* Prevents text selection */
 }
 
 .main__tab {
@@ -125,6 +126,12 @@ body {
 .main__tab--active {
     background-color: var(--color-tab-active-background);
     color: var(--color-tab-active-text);
+}
+
+.main__tab--disabled {
+    pointer-events: none; /* Prevent click and hover events */
+    cursor: not-allowed; /* Change cursor to indicate it's disabled */
+    opacity: 0.5; /* Dim the tab to show it's disabled */
 }
 
 /* Main Info: Centered in Middle */

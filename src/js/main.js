@@ -25,6 +25,18 @@ const updateText = (element, text) => {
     if (element) element.textContent = text
 }
 
+const disableYesterdayTab = (disable) => {
+    if (disable) {
+        elements.yesterdayTab.classList.add("main__tab--disabled")
+        elements.yesterdayTab.setAttribute("title", "No stock data for yesterday")
+        elements.yesterdayTab.setAttribute("aria-main__tab--disabled", "true")
+    } else {
+        elements.yesterdayTab.classList.remove("main__tab--disabled")
+        elements.yesterdayTab.removeAttribute("title")
+        elements.yesterdayTab.removeAttribute("aria-main__tab--disabled")
+    }
+}
+
 const states = {
     loading: () => {
         setVisibility(elements.loading, "visible")
@@ -57,14 +69,13 @@ const fetchData = async (index = -1) => {
         if (!response.ok) throw new Error("Network response was not ok")
 
         const data = await response.json()
-        console.log(data)
         if (data.length === 0) throw new Error("No data available")
 
-        // Hide the "Yesterday" tab if there's only one item
+        // Disable the "Yesterday" tab if there's only one item
         if (data.length === 1) {
-            setDisplay(elements.yesterdayTab, "none")
+            disableYesterdayTab(true)
         } else {
-            setDisplay(elements.yesterdayTab, "block")
+            disableYesterdayTab(false)
         }
 
         const selectedItem = index === -1 ? data[data.length - 1] : data[data.length - 2]
@@ -89,7 +100,11 @@ function switchTab(activeTab, inactiveTab, index) {
 }
 
 elements.todayTab.addEventListener("click", () => switchTab(elements.todayTab, elements.yesterdayTab, -1))
-elements.yesterdayTab.addEventListener("click", () => switchTab(elements.yesterdayTab, elements.todayTab, -2))
+elements.yesterdayTab.addEventListener("click", () => {
+    if (!elements.yesterdayTab.classList.contains("main__tab--disabled")) {
+        switchTab(elements.yesterdayTab, elements.todayTab, -2)
+    }
+})
 
 const init = () => {
     states.loading()
