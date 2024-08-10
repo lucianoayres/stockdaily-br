@@ -129,7 +129,6 @@ body {
 }
 
 .main__tab--disabled {
-    pointer-events: none; /* Prevent click and hover events */
     cursor: not-allowed; /* Change cursor to indicate it's disabled */
     opacity: 0.5; /* Dim the tab to show it's disabled */
 }
