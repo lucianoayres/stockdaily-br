@@ -8,6 +8,8 @@ const elements = {
     disclaimer: document.querySelector(".main__disclaimer"),
 }
 
+const DATA_URL = "ahttps://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-ticker.json"
+
 const setVisibility = (element, visibility) => {
     if (element) element.style.visibility = visibility
 }
@@ -23,7 +25,7 @@ const updateText = (element, text) => {
 const states = {
     loading: () => {
         setDisplay(elements.loading, "block")
-        setVisibility(elements.mainTop, "visible")
+        setVisibility(elements.mainTop, "hidden")
         setVisibility(elements.tabs, "hidden")
         setVisibility(elements.code, "hidden")
         setVisibility(elements.company, "hidden")
@@ -46,22 +48,30 @@ const states = {
     },
 }
 
-const loadData = () => {
-    updateText(elements.code, "PETR")
-    updateText(elements.company, "PETROBRAS")
-    console.log("Load data invoked")
-    states.showData() // Show the loaded data state
+const fetchData = async () => {
+    try {
+        const response = await fetch(DATA_URL)
+        if (!response.ok) throw new Error("Network response was not ok")
+
+        const data = await response.json()
+        const { ticker: code, name: company } = data
+
+        if (!code || !company) {
+            throw new Error("Invalid data: code or company is missing")
+        }
+
+        updateText(elements.code, code)
+        updateText(elements.company, company)
+        states.showData()
+    } catch (error) {
+        console.error("Error fetching data:", error)
+        states.error()
+    }
 }
 
 const init = () => {
-    states.loading() // Start with the loading state
-
-    try {
-        loadData() // Attempt to load data
-    } catch (error) {
-        console.error("Error loading data:", error)
-        states.error() // Switch to error state on failure
-    }
+    states.loading()
+    fetchData()
 }
 
 init()
