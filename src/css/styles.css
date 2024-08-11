@@ -248,10 +248,12 @@ body {
 
     .main__code {
         font-size: 10rem;
+        height: calc(10rem * 0.98); /* Fixed height based on font size and line-height */
     }
 
     .main__company {
         font-size: 4.25rem;
+        height: calc(4.25rem * 1.2); /* Fixed height based on font size and line-height */
     }
 
     .main__tab {
