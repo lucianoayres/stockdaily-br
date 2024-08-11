@@ -1,5 +1,3 @@
-import { DISABLED_TAB_CLASSNAME } from "./elements.js"
-
 export const setElementVisibility = (element, visibility) => {
     if (element) element.style.visibility = visibility
 }
@@ -12,13 +10,13 @@ export const updateElementText = (element, text) => {
     if (element) element.textContent = text.toUpperCase()
 }
 
-export const toggleTabState = (tab, disable, title, disabledTitle) => {
+export const toggleTabState = (tab, disable, title, disabledTitle, disabledClassName) => {
     if (disable) {
-        tab.classList.add(DISABLED_TAB_CLASSNAME)
+        tab.classList.add(disabledClassName)
         tab.setAttribute("title", disabledTitle)
         tab.setAttribute("aria-disabled", "true")
     } else {
-        tab.classList.remove(DISABLED_TAB_CLASSNAME)
+        tab.classList.remove(disabledClassName)
         tab.setAttribute("title", title)
         tab.removeAttribute("aria-disabled")
     }

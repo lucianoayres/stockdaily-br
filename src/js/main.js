@@ -1,5 +1,5 @@
-import { STOCK_DATA_URL, RANDOM_DATA_URL } from "./constants.js"
-import { ELEMENTS, ACTIVE_TAB_CLASSNAME, DISABLED_TAB_CLASSNAME } from "./elements.js"
+import { STOCK_DATA_URL, RANDOM_DATA_URL } from "./apiUrls.js"
+import { ELEMENTS, ACTIVE_TAB_CLASSNAME, DISABLED_TAB_CLASSNAME, TODAY_TAB_TITLE, YESTERDAY_TAB_TITLE, RANDOM_TAB_TITLE } from "./elements.js"
 import { showLoadingState } from "./states.js"
 import { fetchData } from "./dataFetcher.js"
 
@@ -13,6 +13,10 @@ const switchTab = (activeTab, inactiveTabs, mode, url) => {
 }
 
 export const initializeEvents = () => {
+    todayTab.setAttribute("title", TODAY_TAB_TITLE)
+    yesterdayTab.setAttribute("title", TODAY_TAB_TITLE)
+    randomTab.setAttribute("title", TODAY_TAB_TITLE)
+
     todayTab.addEventListener("click", () => switchTab(todayTab, [yesterdayTab, randomTab], "today", STOCK_DATA_URL))
     yesterdayTab.addEventListener("click", () => {
         if (!yesterdayTab.classList.contains(DISABLED_TAB_CLASSNAME)) {
