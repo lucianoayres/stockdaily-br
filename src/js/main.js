@@ -5,6 +5,10 @@ import { fetchData } from "./dataFetcher.js"
 
 const { todayTab, yesterdayTab, randomTab, tryAgainButton } = ELEMENTS
 
+todayTab.setAttribute("title", TODAY_TAB_TITLE)
+yesterdayTab.setAttribute("title", TODAY_TAB_TITLE)
+randomTab.setAttribute("title", TODAY_TAB_TITLE)
+
 const switchTab = (activeTab, inactiveTabs, mode, url) => {
     activeTab.classList.add(ACTIVE_TAB_CLASSNAME)
     inactiveTabs.forEach((tab) => tab.classList.remove(ACTIVE_TAB_CLASSNAME))
@@ -13,10 +17,6 @@ const switchTab = (activeTab, inactiveTabs, mode, url) => {
 }
 
 export const initializeEvents = () => {
-    todayTab.setAttribute("title", TODAY_TAB_TITLE)
-    yesterdayTab.setAttribute("title", TODAY_TAB_TITLE)
-    randomTab.setAttribute("title", TODAY_TAB_TITLE)
-
     todayTab.addEventListener("click", () => switchTab(todayTab, [yesterdayTab, randomTab], "today", STOCK_DATA_URL))
     yesterdayTab.addEventListener("click", () => {
         if (!yesterdayTab.classList.contains(DISABLED_TAB_CLASSNAME)) {
@@ -29,7 +29,7 @@ export const initializeEvents = () => {
 
 const init = () => {
     showLoadingState()
-    fetchData({ mode: "today", url: STOCK_DATA_URL }) // Load the last item (today's data) by default
+    fetchData({ mode: "today", url: STOCK_DATA_URL })
     initializeEvents()
 }
 
