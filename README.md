@@ -2,7 +2,7 @@
 
 Welcome to the Random Stock Ticker of the Day project! This responsive website allows users to view a random stock ticker from the Brazil Stock Exchange (B3) for today, yesterday, or get a random item.
 
-![StockDaily-BR Website Screenshot](https://github.com/user-attachments/assets/a9db8dcc-95e5-4228-82f9-2fd967115365)
+![StockDaily-BR Website Screenshot](https://github.com/user-attachments/assets/3da32d22-025e-47c5-b732-ae0404cc16a0)
 
 _The website displays a random stock ticker of the day, yesterday's ticker, and a random item._
 
