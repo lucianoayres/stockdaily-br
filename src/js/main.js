@@ -14,8 +14,23 @@ const elements = {
 }
 
 // Constants
-const STOCK_DATA_URL = "https://raw.githubusercontent.com/lucianoayres/random-stock-of-the-day-json/main/b3-last-picks.json"
-const RANDOM_DATA_URL = "https://raw.githubusercontent.com/lucianoayres/brazil-stocks-tickers-json/main/b3_stocks_tickers.json" // Separate URL for random data
+// URL Configurations
+const stockDataConfig = {
+    baseUrl: "https://raw.githubusercontent.com/",
+    repositoryName: "lucianoayres/random-stock-of-the-day-json/main/",
+    fileName: "b3-last-picks.json",
+}
+
+const randomDataConfig = {
+    baseUrl: "https://raw.githubusercontent.com/",
+    repositoryName: "lucianoayres/brazil-stocks-tickers-json/main/",
+    fileName: "b3_stocks_tickers.json",
+}
+
+// Constructed URLs
+const STOCK_DATA_URL = `${stockDataConfig.baseUrl}${stockDataConfig.repositoryName}${stockDataConfig.fileName}`
+const RANDOM_DATA_URL = `${randomDataConfig.baseUrl}${randomDataConfig.repositoryName}${randomDataConfig.fileName}`
+
 const ACTIVE_TAB_CLASSNAME = "main__tab--active"
 const DISABLED_TAB_CLASSNAME = "main__tab--disabled"
 
