@@ -6,8 +6,8 @@ import { fetchData } from "./dataFetcher.js"
 const { todayTab, yesterdayTab, randomTab, tryAgainButton } = ELEMENTS
 
 todayTab.setAttribute("title", TODAY_TAB_TITLE)
-yesterdayTab.setAttribute("title", TODAY_TAB_TITLE)
-randomTab.setAttribute("title", TODAY_TAB_TITLE)
+yesterdayTab.setAttribute("title", YESTERDAY_TAB_TITLE)
+randomTab.setAttribute("title", RANDOM_TAB_TITLE)
 
 const switchTab = (activeTab, inactiveTabs, mode, url) => {
     activeTab.classList.add(ACTIVE_TAB_CLASSNAME)
